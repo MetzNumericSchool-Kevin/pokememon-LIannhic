@@ -1,0 +1,226 @@
+<!-- <!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Particules RGB Dynamiques</title>
+    <style>
+        /* Définition des variables CSS pour la variation de couleur */
+        :root {
+            --r-offset: 0;
+            --g-offset: 0;
+            --b-offset: 0;
+        }
+
+        body {
+            background-color: black;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        /* Conteneur pour stocker les particules */
+        .container {
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: fall 3s linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+    </style> -->
+<!-- </head>
+<body>
+    <!-- Ajout du conteneur pour éviter qu'il soit manquant -->
+    <!-- <div class="container"></div> -->
+
+    <!-- <script>
+        const container = document.querySelector(".container");
+
+        // Fonction qui génère une valeur aléatoire pour la couleur de base (0 à 150)
+        function randomColorValue() {
+            return Math.floor(Math.random() * 150);
+        }
+
+        // Fonction qui génère une valeur d'offset pour la variation (0 à 105)
+        function randomOffsetValue() {
+            return Math.floor(Math.random() * 105);
+        }
+
+        // Fonction qui crée une particule
+        function createParticle() {
+            const particle = document.createElement("div");
+            particle.classList.add("particle");
+
+            // Génération d'une couleur RGB aléatoire pour la particule
+            const baseR = randomColorValue();
+            const baseG = randomColorValue();
+            const baseB = randomColorValue();
+
+            // Application d'un décalage (offset) pour faire varier la couleur au fil du temps
+            const rOffset = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--r-offset"));
+            const gOffset = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--g-offset"));
+            const bOffset = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--b-offset"));
+
+            // Calcul de la couleur avec l'offset (on limite à 255 max)
+            const finalR = Math.min(baseR + rOffset, 255);
+            const finalG = Math.min(baseG + gOffset, 255);
+            const finalB = Math.min(baseB + bOffset, 255);
+
+            // Application de la couleur dynamique
+            particle.style.backgroundColor = `rgb(${finalR}, ${finalG}, ${finalB})`;
+
+            // Positionnement et taille aléatoires
+            particle.style.left = `${Math.random() * 100}vw`;
+            particle.style.width = `${Math.random() * 8 + 5}px`;
+            particle.style.height = particle.style.width;
+
+            // Ajout au DOM
+            container.appendChild(particle);
+
+            // Supprime la particule après 3 secondes
+            setTimeout(() => {
+                particle.remove();
+            }, 3000);
+        }
+
+        // Fonction pour modifier les variables CSS (variation des couleurs)
+        function changeColorOffsets() {
+            document.documentElement.style.setProperty("--r-offset", randomOffsetValue());
+            document.documentElement.style.setProperty("--g-offset", randomOffsetValue());
+            document.documentElement.style.setProperty("--b-offset", randomOffsetValue());
+        }
+
+        // Génère une particule toutes les 150ms
+        setInterval(createParticle, 150);
+
+        // Modifier les offsets toutes les 2 secondes pour changer légèrement la couleur
+        setInterval(changeColorOffsets, 200);
+    </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Particules RGB Dynamiques</title>
+    <style>
+        :root {
+            --r-offset: 0;
+            --g-offset: 0;
+            --b-offset: 0;
+        }
+
+        body {
+            background-color: black;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        .container {
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: fall 3s linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container"></div>
+
+    <script>
+        const container = document.querySelector(".container");
+        let particles = [];
+
+        function randomColorValue() {
+            return Math.floor(Math.random() * 151); // Base : 0-150
+        }
+
+        function randomOffsetValue() {
+            return Math.floor(Math.random() * 106); // Offset : 0-105
+        }
+
+        function createParticle() {
+            const particle = document.createElement("div");
+            particle.classList.add("particle");
+
+            // Génération d'une couleur de base
+            const baseR = randomColorValue();
+            const baseG = randomColorValue();
+            const baseB = randomColorValue();
+
+            // Stocker la couleur dans l'élément
+            particle.dataset.baseR = baseR;
+            particle.dataset.baseG = baseG;
+            particle.dataset.baseB = baseB;
+
+            // Positionnement et taille aléatoire
+            particle.style.left = `${Math.random() * 100}vw`;
+            particle.style.width = `${Math.random() * 8 + 5}px`;
+            particle.style.height = particle.style.width;
+
+            // Appliquer la couleur avec offset
+            updateParticleColor(particle);
+
+            container.appendChild(particle);
+            particles.push(particle);
+
+            // Supprimer la particule après 3 secondes
+            setTimeout(() => {
+                particle.remove();
+                particles = particles.filter(p => p !== particle);
+            }, 3000);
+        }
+
+        function updateParticleColor(particle) {
+            const rOffset = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--r-offset"));
+            const gOffset = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--g-offset"));
+            const bOffset = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--b-offset"));
+
+            const finalR = Math.min(parseInt(particle.dataset.baseR) + rOffset, 255);
+            const finalG = Math.min(parseInt(particle.dataset.baseG) + gOffset, 255);
+            const finalB = Math.min(parseInt(particle.dataset.baseB) + bOffset, 255);
+
+            particle.style.backgroundColor = `rgb(${finalR}, ${finalG}, ${finalB})`;
+        }
+
+        function changeColorOffsets() {
+            document.documentElement.style.setProperty("--r-offset", randomOffsetValue());
+            document.documentElement.style.setProperty("--g-offset", randomOffsetValue());
+            document.documentElement.style.setProperty("--b-offset", randomOffsetValue());
+
+            // Mettre à jour toutes les particules existantes
+            particles.forEach(updateParticleColor);
+        }
+
+        setInterval(createParticle, 150);
+        setInterval(changeColorOffsets, 500);
+    </script>
+</body>
+</html>

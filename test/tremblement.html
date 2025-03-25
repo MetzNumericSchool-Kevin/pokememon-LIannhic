@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shake Screen Effect</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 20vh;
+        }
+
+        /* Animation de tremblement */
+        @keyframes shake {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(-5px, 5px); }
+            50% { transform: translate(5px, -5px); }
+            75% { transform: translate(-5px, -5px); }
+            100% { transform: translate(5px, 5px); }
+        }
+
+        /* Classe qui déclenche le tremblement */
+        .shake {
+            animation: shake 0.2s linear infinite;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            margin-top: 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background: red;
+            color: white;
+        }
+
+        button:hover {
+            background: darkred;
+        }
+    </style>
+</head>
+<body>
+    <h1>Shake Screen Effect 🔥</h1>
+    <button onclick="toggleShake()">Secouer l'écran</button>
+
+    <script>
+        let isShaking = false;
+
+        function toggleShake() {
+            if (isShaking) {
+                document.body.classList.remove("shake");
+            } else {
+                document.body.classList.add("shake");
+            }
+            isShaking = !isShaking;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Effet de neige colorée</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #000;
+            overflow: hidden;
+        }
+
+        .fairy-dust {
+            position: absolute;
+            top: 0px;
+            user-select: none;
+            opacity: 0.8;
+            animation: dust 0.5S linear infinite;
+        }
+
+        @keyframes dust {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.8;
+    }
+    20% {
+        transform: translateY(20vh) translateX(-15px);
+    }
+    40% {
+        transform: translateY(40vh) translateX(0px);
+    }
+    60% {
+        transform: translateY(60vh) translateX(15px);
+    }
+    80% {
+        transform: translateY(80vh) translateX(0px);
+    }
+    100% {
+        transform: translateY(100vh) translateX(-15px);
+        opacity: 0;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <script>
+        function createtinkle() {
+            const stars = ["*", "⁕", "⁎", "⋇", "⨳", "☆", "❁", "✿", "✧", "★"];
+            const colors = ["red", "yellow", "green", "blue", "purple", "cyan", "orange", "pink"];
+
+            for (let i = 0; i < 121; i++) {
+                let star = document.createElement("div");
+                star.className = "fairy-dust";
+                star.innerHTML = stars[Math.floor(Math.random() * stars.length)];
+                star.style.left = Math.random() * 100 + "vw";
+                star.style.animationDuration = (Math.random() * 5 + 5) + "s";
+                star.style.fontSize = (Math.random() * 20 + 10) + "px"; 
+                star.style.animationDelay = Math.random() * 5 + "s";
+
+                function changeColor() {
+                    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                    const randomColorShadow = colors[Math.floor(Math.random() * colors.length)];
+                    star.style.color = randomColor;
+                    star.style.textShadow = `0 0 8px ${randomColorShadow}`;
+                }
+
+                // Changer la couleur toutes les 500ms
+                changeColor();
+                const colorInterval = setInterval(changeColor, 100);
+
+                // Supprimer l'étoile après l'animation + arrêter le changement de couleur
+                star.addEventListener("animationend", () => {
+                    clearInterval(colorInterval);
+                    star.remove();
+                });
+
+                document.body.appendChild(star);
+            }
+        }
+
+        createtinkle();
+    </script>
+</body>
+</html>

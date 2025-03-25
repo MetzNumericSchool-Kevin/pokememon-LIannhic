@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation en Keyframes</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #282c34;
+            overflow: hidden;
+        }
+        .container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: rotate 3s linear infinite;
+        }
+
+        .container2 {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: rotate 3s linear infinite;
+        }
+
+        .dot {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            animation: augmente 2s linear infinite;
+        }
+        .dot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes augmente {
+            0% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(-2);
+            }
+            50% {
+                transform: scale(1);
+            }
+            75% {
+                transform: rotate(2);
+            }
+            100% {
+                transform: rotate(1);
+            }
+
+        }
+        .dot:nth-child(1) { transform: rotate(0deg) translate(100px); }
+        .dot:nth-child(2) { transform: rotate(60deg) translate(100px); }
+        .dot:nth-child(3) { transform: rotate(120deg) translate(100px); }
+        .dot:nth-child(4) { transform: rotate(180deg) translate(100px); }
+        .dot:nth-child(5) { transform: rotate(240deg) translate(100px); }
+        .dot:nth-child(6) { transform: rotate(300deg) translate(100px); }
+    </style>
+</head>
+<body>
+    <div class="container2">
+        <div class="container">
+            <div class="dot"><img src="./assets/green-palm-tree-leaf-isolated-transparent-background-png-psd_888962-1674.avif" alt=""></div>
+            <div class="dot"><img src="./assets/green-palm-tree-leaf-isolated-transparent-background-png-psd_888962-1674.avif" alt=""></div>
+            <div class="dot"><img src="./assets/green-palm-tree-leaf-isolated-transparent-background-png-psd_888962-1674.avif" alt=""></div>
+            <div class="dot"><img src="./assets/green-palm-tree-leaf-isolated-transparent-background-png-psd_888962-1674.avif" alt=""></div>
+            <div class="dot"><img src="./assets/green-palm-tree-leaf-isolated-transparent-background-png-psd_888962-1674.avif" alt=""></div>
+            <div class="dot"><img src="./assets/green-palm-tree-leaf-isolated-transparent-background-png-psd_888962-1674.avif" alt=""></div>
+        </div>
+        <div class="dot"><img src="./assets/green-palm-tree-leaf-isolated-transparent-background-png-psd_888962-1674.avif" alt=""></div>
+        <div class="dot"><img src="./assets/green-palm-tree-leaf-isolated-transparent-background-png-psd_888962-1674.avif" alt=""></div>
+        <div class="dot"><img src="./assets/green-palm-tree-leaf-isolated-transparent-background-png-psd_888962-1674.avif" alt=""></div>
+        <div class="dot"><img src="./assets/green-palm-tree-leaf-isolated-transparent-background-png-psd_888962-1674.avif" alt=""></div>
+        <div class="dot"><img src="./assets/green-palm-tree-leaf-isolated-transparent-background-png-psd_888962-1674.avif" alt=""></div>
+        <div class="dot"><img src="./assets/green-palm-tree-leaf-isolated-transparent-background-png-psd_888962-1674.avif" alt=""></div>
+    </div>
+</body>
+</html>
